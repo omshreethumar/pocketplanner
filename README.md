@@ -1,85 +1,181 @@
 # 💰 Pocket Planner
 
-### Turning irregular income into stable saving with Agentic AI 🤖💸
+### Turning Irregular Income into Stable Saving with Agentic AI 🤖
 
-Pocket Planner is an AI-powered personal finance web application designed to help users manage income, control expenses, and build consistent saving habits — especially when income is irregular.
-
-Instead of simply showing financial data, Pocket Planner turns transactions into meaningful insights and actionable saving guidance.
+Pocket Planner is an AI-powered personal finance web application that helps users manage their income, track expenses, understand spending patterns, and build better saving habits.
 
 ---
 
-## 🚀 Live Project
+## 🎯 Problem
 
-🌐 **Live Demo:** Add your deployed link here
+People with irregular income often struggle to:
 
-📂 **GitHub Repository:** Add your GitHub repository link here
+- Track where their money is going
+- Control unnecessary expenses
+- Know how much they can safely spend
+- Set realistic saving goals
+- Maintain consistent saving habits
 
----
-
-## 🎯 Problem Statement
-
-Managing money becomes difficult when income is irregular.
-
-Many users struggle with:
-
-- Understanding where their money is going
-- Controlling unnecessary expenses
-- Knowing how much they can safely spend
-- Setting realistic saving targets
-- Maintaining consistent saving habits
-- Making financial decisions from raw transaction data
-
-Traditional expense trackers mainly record transactions.
-
-**Pocket Planner goes one step further by converting financial activity into useful insights and saving guidance.**
+Traditional expense trackers mainly record transactions. Pocket Planner goes a step further by turning financial data into useful insights and saving guidance.
 
 ---
 
-## 💡 Our Solution
+## 💡 Solution
 
-Pocket Planner provides a simple financial dashboard that helps users:
+Pocket Planner provides a simple and interactive dashboard where users can:
 
-- Track income and expenses
-- Calculate available balance
-- Monitor spending patterns
-- Categorize transactions
-- Visualize expenses
-- Set savings goals
-- Track savings progress
-- Receive AI-powered financial suggestions
-- Identify spending signals and patterns
-
-### Our Vision
-
-> **Turn irregular income into stable saving with Agentic AI.**
+- 💰 Track income and expenses
+- 📊 Analyze spending patterns
+- 🏷️ Categorize transactions
+- 🎯 Set savings goals
+- 📈 Monitor savings progress
+- 🤖 Get AI-powered financial guidance
+- ⚡ Identify important spending signals
 
 ---
 
-# ✨ Key Features
+## ✨ Features
 
-## 💳 1. Transaction Management
+### 💳 Transaction Management
+Users can add and delete income and expense transactions with:
 
-Users can easily add:
-
-- Income
-- Expenses
 - Transaction title
 - Amount
+- Type
 - Category
 
-Transactions are stored securely in MongoDB.
+### 💰 Smart Balance
+Automatically calculates:
 
-Users can also delete transactions when required.
+- Total income
+- Total expenses
+- Available balance
+
+### 📊 Expense Analytics
+Visualizes spending using interactive charts and category-based analysis.
+
+### 🎯 Savings Goal
+Users can set a savings target and track:
+
+- Current savings
+- Target amount
+- Remaining amount
+- Progress percentage
+
+### 🤖 AI Financial Guidance
+Provides financial insights and recommendations based on the user's spending activity.
+
+### ⚡ Financial Signals
+Helps users notice important spending patterns and saving opportunities.
+
+### 🎨 Modern Dashboard
+The application includes:
+
+- Modern dark UI
+- Glassmorphism design
+- Smooth animations
+- Hover effects
+- Interactive cards
+- Responsive layout
 
 ---
 
-## 💰 2. Smart Balance Tracking
+## 🧠 Agentic AI
 
-Pocket Planner automatically calculates:
+Pocket Planner is designed to evolve from a simple expense tracker into an intelligent financial assistant.
+
+### Workflow
 
 ```text
-Total Income
-      ↓
-Total Expenses
-      ↓
-Available Balance
+User Financial Data
+        ↓
+Transaction Analysis
+        ↓
+Spending Pattern Detection
+        ↓
+Financial Insight
+        ↓
+             ┌─────────────────┐
+             │      User       │
+             └────────┬────────┘
+                      ↓
+             ┌─────────────────┐
+             │ React Frontend  │
+             │  Pocket Planner │
+             └────────┬────────┘
+                      ↓
+                REST API
+                      ↓
+             ┌─────────────────┐
+             │ Express Backend │
+             │     Node.js     │
+             └────────┬────────┘
+                      ↓
+             ┌─────────────────┐
+             │     MongoDB     │
+             └─────────────────┘
+pocket-planner/
+│
+├── src/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── server/
+│   ├── server.cjs
+│   ├── models/
+│   │   └── Transaction.cjs
+│   └── routes/
+│       └── transactions.cjs
+│
+├── public/
+│
+├── package.json
+├── package-lock.json
+├── vite.config.js
+├── .gitignore
+└── README.md
+AI Recommendation
+
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd pocket-planner
+npm install
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+Start Backend
+
+Open Terminal 1:
+
+node server/server.cjs
+
+Expected output:
+
+Server running on http://localhost:5000
+MongoDB connected successfully
+Start Frontend
+
+Open Terminal 2:
+
+npx vite
+
+Then open the URL shown by Vite.
+
+🔌 API Endpoints
+Get Transactions
+GET /api/transactions
+Add Transaction
+POST /api/transactions
+
+Example:
+
+{
+  "title": "Food",
+  "amount": 850,
+  "type": "expense",
+  "category": "Food"
+}
+Delete Transaction
+DELETE /api/transactions/:id
+cd pocket-planner
+        ↓
+Saving Actionnpm install
