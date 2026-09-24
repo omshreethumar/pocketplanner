@@ -49,23 +49,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Temporary test route
-router.get("/test-add", async (req, res) => {
-  try {
-    const transaction = await Transaction.create({
-      title: "Food",
-      amount: 850,
-      type: "expense",
-      category: "Food"
-    });
-
-    res.json(transaction);
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to add test transaction",
-      error: error.message
-    });
-  }
-});
-
 module.exports = router;
