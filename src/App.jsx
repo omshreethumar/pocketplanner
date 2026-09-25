@@ -8,8 +8,10 @@ import {
 } from "recharts";
 import "./index.css";
 
-const API_URL = "http://localhost:5000/api/transactions";
-
+// =========================
+// PRODUCTION API
+// =========================
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000") + "/api/transactions";
 const COLORS = [
   "#8b5cf6",
   "#06b6d4",
@@ -28,6 +30,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [savingsTarget, setSavingsTarget] = useState(50000);
 
+  // =========================
+  // FETCH TRANSACTIONS
+  // =========================
   const fetchTransactions = async () => {
     try {
       const response = await fetch(API_URL);
@@ -49,6 +54,9 @@ function App() {
     fetchTransactions();
   }, []);
 
+  // =========================
+  // ADD TRANSACTION
+  // =========================
   const addTransaction = async (e) => {
     e.preventDefault();
 
@@ -94,37 +102,40 @@ function App() {
       setType("expense");
       setCategory("Food");
     } catch (error) {
-      console.error(error);
+      console.error("Add transaction error:", error);
       alert("Could not add transaction.");
     } finally {
       setLoading(false);
     }
   };
 
-  const deleteTransaction = async (id) => {
-    try {
-      const response = await fetch(
-        `${API_URL}/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete");
+const deleteTransaction = async (id) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/${id}`,
+      {
+        method: "DELETE",
       }
+    );
 
-      setTransactions((prev) =>
-        prev.filter(
-          (transaction) =>
-            transaction._id !== id
-        )
-      );
-    } catch (error) {
-      console.error(error);
-      alert("Could not delete transaction.");
+    if (!response.ok) {
+      throw new Error("Failed to delete");
     }
-  };
+
+    setTransactions((prev) =>
+      prev.filter(
+        (transaction) => transaction._id !== id
+      )
+    );
+  } catch (error) {
+    console.error(error);
+    alert("Could not delete transaction.");
+  }
+};
+
+  // =========================
+  // FINANCIAL CALCULATIONS
+  // =========================
 
   const income = transactions
     .filter((t) => t.type === "income")
@@ -186,6 +197,10 @@ function App() {
       0
     );
 
+  // =========================
+  // EXPENSE CHART DATA
+  // =========================
+
   const expenseData = useMemo(() => {
     return transactions
       .filter((t) => t.type === "expense")
@@ -213,6 +228,10 @@ function App() {
         return result;
       }, []);
   }, [transactions]);
+
+  // =========================
+  // AI ADVICE
+  // =========================
 
   const generateAdvice = () => {
     if (transactions.length === 0) {
@@ -421,7 +440,7 @@ function App() {
                     ),
                     0
                   )}
-%
+                  %
                 </strong>
               </div>
 
@@ -431,7 +450,7 @@ function App() {
                   {Math.round(
                     savingsPercentage
                   )}
-%
+                  %
                 </strong>
               </div>
 
@@ -806,6 +825,7 @@ function App() {
             {expenseData.length === 0 ? (
               <div className="empty-state">
                 <div>◌</div>
+
                 <p>
                   Add an expense to unlock
                   your spending intelligence.
@@ -818,6 +838,7 @@ function App() {
                   width="100%"
                   height="100%"
                 >
+
                   <PieChart>
 
                     <Pie
@@ -833,6 +854,7 @@ function App() {
                       animationBegin={100}
                       animationDuration={1200}
                     >
+
                       {expenseData.map(
                         (_, index) => (
                           <Cell
@@ -846,6 +868,7 @@ function App() {
                           />
                         )
                       )}
+
                     </Pie>
 
                     <Tooltip
@@ -865,6 +888,7 @@ function App() {
                     />
 
                   </PieChart>
+
                 </ResponsiveContainer>
 
                 <div className="chart-center">
@@ -1111,6 +1135,7 @@ function App() {
                 setType(e.target.value)
               }
             >
+
               <option value="expense">
                 Expense
               </option>
@@ -1118,6 +1143,7 @@ function App() {
               <option value="income">
                 Income
               </option>
+
             </select>
 
             <select
@@ -1126,6 +1152,7 @@ function App() {
                 setCategory(e.target.value)
               }
             >
+
               <option value="Food">
                 Food
               </option>
@@ -1149,6 +1176,7 @@ function App() {
               <option value="Other">
                 Other
               </option>
+
             </select>
 
             <button
@@ -1193,10 +1221,13 @@ function App() {
 
           {transactions.length === 0 ? (
             <div className="empty-state">
+
               <div>◌</div>
+
               <p>
                 Your money timeline is waiting.
               </p>
+
             </div>
           ) : (
             <div className="timeline">
@@ -1250,13 +1281,16 @@ function App() {
                         transaction.type
                       }`}
                     >
+
                       {transaction.type ===
                       "income"
                         ? "+"
                         : "-"}
+
                       ₹{formatMoney(
                         transaction.amount
                       )}
+
                     </div>
 
                     <button
@@ -1286,11 +1320,13 @@ function App() {
         <footer>
 
           <div className="footer-brand">
+
             <span>₹</span>
 
             <strong>
               PocketPlanner
             </strong>
+
           </div>
 
           <p>
